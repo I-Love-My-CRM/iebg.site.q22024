@@ -62,24 +62,34 @@
         var header = document.querySelector('.ie-header')
         var toggled
         var threshold = 200
+        var scrollThreshold = 10
+        var lastExecution = 0
 
         var checkScroll = function () {
+            var now = Date.now()
+            if (now - lastExecution < 5000) {
+                return
+            }
+            lastExecution = now
+
             curScroll = w.scrollY || doc.scrollTop
-            if (curScroll > prevScroll) {
-                // scrolled down
-                curDirection = 2
-            } else {
-                // scrolled up
-                curDirection = 1
-            }
+            if (Math.abs(curScroll - prevScroll) > scrollThreshold) {
+                if (curScroll > prevScroll) {
+                    // scrolled down
+                    curDirection = 2
+                } else {
+                    // scrolled up
+                    curDirection = 1
+                }
 
-            if (curDirection !== prevDirection) {
-                toggled = toggleHeader()
-            }
+                if (curDirection !== prevDirection) {
+                    toggled = toggleHeader()
+                }
 
-            prevScroll = curScroll
-            if (toggled) {
-                prevDirection = curDirection
+                prevScroll = curScroll
+                if (toggled) {
+                    prevDirection = curDirection
+                }
             }
         }
 
