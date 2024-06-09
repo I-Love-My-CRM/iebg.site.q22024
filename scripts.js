@@ -1,5 +1,5 @@
 ;(function () {
-    console.log('scripts.js is loaded')
+    console.log('Bundled Scripts is loaded')
 
     document.addEventListener('DOMContentLoaded', () => {
         loadFathomAnalytics()
