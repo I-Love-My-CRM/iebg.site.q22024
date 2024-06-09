@@ -1,5 +1,5 @@
 ;(function () {
-    console.log('Bundled Scripts Are loaded.')
+    console.log('Bundled Scripts Are Loaded.')
 
     loadFathomAnalytics()
     loadChatWidget()
@@ -51,44 +51,50 @@
     }
 
     function setupScrollListener() {
-        let lastScrollTop = 0
-        const header = document.querySelector('.ie-header')
+        var doc = document.documentElement
+        var w = window
 
-        const throttle = (func, limit) => {
-            let lastFunc
-            let lastRan
-            return function () {
-                const context = this
-                const args = arguments
-                if (!lastRan) {
-                    func.apply(context, args)
-                    lastRan = Date.now()
-                } else {
-                    clearTimeout(lastFunc)
-                    lastFunc = setTimeout(function () {
-                        if (Date.now() - lastRan >= limit) {
-                            func.apply(context, args)
-                            lastRan = Date.now()
-                        }
-                    }, limit - (Date.now() - lastRan))
-                }
-            }
-        }
+        var curScroll
+        var prevScroll = w.scrollY || doc.scrollTop
+        var curDirection = 0
+        var prevDirection = 0
 
-        const handleScroll = () => {
-            const scrollTop =
-                window.pageYOffset || document.documentElement.scrollTop
+        var header = document.querySelector('.ie-header')
+        var toggled
+        var threshold = 200
 
-            if (scrollTop < lastScrollTop) {
-                // Scrolling up
-                header.style.display = 'block'
+        var checkScroll = function () {
+            curScroll = w.scrollY || doc.scrollTop
+            if (curScroll > prevScroll) {
+                // scrolled down
+                curDirection = 2
             } else {
-                // Scrolling down
-                header.style.display = 'none'
+                // scrolled up
+                curDirection = 1
             }
-            lastScrollTop = scrollTop
+
+            if (curDirection !== prevDirection) {
+                toggled = toggleHeader()
+            }
+
+            prevScroll = curScroll
+            if (toggled) {
+                prevDirection = curDirection
+            }
         }
 
-        window.addEventListener('scroll', throttle(handleScroll, 1000))
+        var toggleHeader = function () {
+            toggled = true
+            if (curDirection === 2 && curScroll > threshold) {
+                header.classList.add('hide')
+            } else if (curDirection === 1) {
+                header.classList.remove('hide')
+            } else {
+                toggled = false
+            }
+            return toggled
+        }
+
+        window.addEventListener('scroll', checkScroll)
     }
 })()
