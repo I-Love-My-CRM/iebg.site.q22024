@@ -2,10 +2,8 @@
 ;(function () {
     console.log('Bundled Scripts is loaded')
 
-    document.addEventListener('DOMContentLoaded', () => {
-        loadFathomAnalytics()
-        loadChatWidget()
-    })
+    loadFathomAnalytics()
+    loadChatWidget()
 
     function loadFathomAnalytics() {
         const fathomScript = document.createElement('script')
