@@ -1,9 +1,9 @@
-/* Wrpapped in an IIFE */
 ;(function () {
-    console.log('Bundled Scripts is loaded')
+    console.log('Bundled Scripts Are loaded.')
 
     loadFathomAnalytics()
     loadChatWidget()
+    setupScrollListener()
 
     function loadFathomAnalytics() {
         const fathomScript = document.createElement('script')
@@ -48,5 +48,47 @@
             'https://widgets.leadconnectorhq.com/chat-widget/loader.js'
         )
         document.body.appendChild(chatWidgetLoader)
+    }
+
+    function setupScrollListener() {
+        let lastScrollTop = 0
+        const header = document.querySelector('.ie-header')
+
+        const throttle = (func, limit) => {
+            let lastFunc
+            let lastRan
+            return function () {
+                const context = this
+                const args = arguments
+                if (!lastRan) {
+                    func.apply(context, args)
+                    lastRan = Date.now()
+                } else {
+                    clearTimeout(lastFunc)
+                    lastFunc = setTimeout(function () {
+                        if (Date.now() - lastRan >= limit) {
+                            func.apply(context, args)
+                            lastRan = Date.now()
+                        }
+                    }, limit - (Date.now() - lastRan))
+                }
+            }
+        }
+
+        const handleScroll = () => {
+            const scrollTop =
+                window.pageYOffset || document.documentElement.scrollTop
+
+            if (scrollTop < lastScrollTop) {
+                // Scrolling up
+                header.style.display = 'block'
+            } else {
+                // Scrolling down
+                header.style.display = 'none'
+            }
+            lastScrollTop = scrollTop
+        }
+
+        window.addEventListener('scroll', throttle(handleScroll, 1000))
     }
 })()
