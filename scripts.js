@@ -3,7 +3,6 @@
 
     loadFathomAnalytics()
     loadChatWidget()
-    setupScrollListener()
 
     function loadFathomAnalytics() {
         const fathomScript = document.createElement('script')
@@ -48,63 +47,5 @@
             'https://widgets.leadconnectorhq.com/chat-widget/loader.js'
         )
         document.body.appendChild(chatWidgetLoader)
-    }
-
-    function setupScrollListener() {
-        var doc = document.documentElement
-        var w = window
-
-        var curScroll
-        var prevScroll = w.scrollY || doc.scrollTop
-        var curDirection = 0
-        var prevDirection = 0
-
-        var header = document.querySelector('.ie-header')
-        var toggled
-        var threshold = 200
-        var scrollThreshold = 10
-        var lastExecution = 0
-
-        var checkScroll = function () {
-            var now = Date.now()
-            if (now - lastExecution < 5000) {
-                return
-            }
-            lastExecution = now
-
-            curScroll = w.scrollY || doc.scrollTop
-            if (Math.abs(curScroll - prevScroll) > scrollThreshold) {
-                if (curScroll > prevScroll) {
-                    // scrolled down
-                    curDirection = 2
-                } else {
-                    // scrolled up
-                    curDirection = 1
-                }
-
-                if (curDirection !== prevDirection) {
-                    toggled = toggleHeader()
-                }
-
-                prevScroll = curScroll
-                if (toggled) {
-                    prevDirection = curDirection
-                }
-            }
-        }
-
-        var toggleHeader = function () {
-            toggled = true
-            if (curDirection === 2 && curScroll > threshold) {
-                header.classList.add('hide')
-            } else if (curDirection === 1) {
-                header.classList.remove('hide')
-            } else {
-                toggled = false
-            }
-            return toggled
-        }
-
-        window.addEventListener('scroll', checkScroll)
     }
 })()
