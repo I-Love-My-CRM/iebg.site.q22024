@@ -1,3 +1,4 @@
+/* Wrpapped in an IIFE */
 ;(function () {
     console.log('Bundled Scripts is loaded')
 
