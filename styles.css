@@ -1,5 +1,4 @@
-.ie-button,
-button {
+.ie-button {
     min-width: 250px !important;
     height: 60px !important;
     color: #fff !important;
@@ -16,20 +15,17 @@ button {
     background-color: #02ad88 !important;
 }
 
-.ie-button:hover,
-button:hover {
+.ie-button:hover {
     padding-right: 24px !important;
     padding-left: 8px !important;
 }
 
-.ie-button:hover:after,
-button:hover:after {
+.ie-button:hover:after {
     opacity: 1 !important;
     right: 10px !important;
 }
 
-.ie-button:after,
-button:after {
+.ie-button:after {
     content: '\00BB' !important;
     position: absolute !important;
     opacity: 0 !important;
