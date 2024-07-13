@@ -1,4 +1,5 @@
-.ie-button {
+.ie-button,
+button {
     min-width: 250px !important;
     height: 60px !important;
     color: #fff !important;
@@ -15,17 +16,20 @@
     background-color: #02ad88 !important;
 }
 
-.ie-button:hover {
+.ie-button:hover,
+button:hover {
     padding-right: 24px !important;
     padding-left: 8px !important;
 }
 
-.ie-button:hover:after {
+.ie-button:hover:after,
+button:hover:after {
     opacity: 1 !important;
     right: 10px !important;
 }
 
-.ie-button:after {
+.ie-button:after,
+button:after {
     content: '\00BB' !important;
     position: absolute !important;
     opacity: 0 !important;
@@ -75,4 +79,8 @@ div#row-5_1eQoY533.hero100 .col-gVCcdzr_0v {
 
 #nav-menu-popup.nav-menu-TfJkTrD1bb .nav-menu-body .close-menu {
     font-size: 1.8rem !important;
+}
+
+.iebg-registration-section {
+    display: none;
 }
