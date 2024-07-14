@@ -51,7 +51,7 @@ div#row-5_1eQoY533.hero100 .col-gVCcdzr_0v {
 }
 
 .ie-add-top-bar {
-    border-top: 10px solid #02ad88 !important;
+    border-top: 3px solid #02ad88 !important;
 }
 
 @media (max-width: 480px) {
@@ -75,8 +75,4 @@ div#row-5_1eQoY533.hero100 .col-gVCcdzr_0v {
 
 #nav-menu-popup.nav-menu-TfJkTrD1bb .nav-menu-body .close-menu {
     font-size: 1.8rem !important;
-}
-
-.iebg-registration-section {
-    display: none;
 }
