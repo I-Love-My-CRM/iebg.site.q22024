@@ -77,6 +77,10 @@ div#row-5_1eQoY533.hero100 .col-gVCcdzr_0v {
     font-size: 1.8rem !important;
 }
 
+.nav-menu .nav-menu-item a {
+    border-radius: 5px;
+}
+
 input.otp {
     min-width: 100% !important;
 }
